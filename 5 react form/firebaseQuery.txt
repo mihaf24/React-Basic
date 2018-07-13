@@ -1,0 +1,76 @@
+/*
+  //setting a value
+  firebaseDB.ref('user/eyes').set('brown')
+  .then(()=>{
+      console.log('data saved')
+  }).catch((e)=>{
+      console.log(e)
+  })
+  //Removing a value
+ firebaseDB.ref('user/eyes').remove()
+ .then(()=>{
+     console.log('data removed')
+ }).catch((e)=>{
+     console.log(e)
+ }) 
+ 
+//updating data
+firebaseDB.ref('user').update({
+    age: '27',
+    name: 'fahad'
+})
+.then(()=>{
+    console.log('data updated')
+}).catch((e)=>{
+    console.log(e)
+}) 
+
+//get data once
+firebaseDB.ref('user').once('value')
+.then((snapshot)=>{
+    console.log(snapshot.val())
+}).catch((e)=>{
+    console.log(e)
+}) 
+
+//continously getting and updating data from firebase
+firebaseDB.ref('user').on('value', (snapshot)=>{
+    console.log(snapshot.val())
+})
+
+
+firebaseDB.ref('axios').push(
+    {
+        name: 'fahimad',
+        age: 90,
+        skill: 'none'
+    }
+)
+
+//getting a data from db as an array
+firebaseDB.ref('axios').once('value')
+.then((snapshot)=>{
+    const users = [];
+    snapshot.forEach((childSnapshot)=>{
+        users.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+        })
+    })
+    console.log(users)
+})
+
+//ordering by age and only shows 1st result
+firebaseDB.ref('axios').orderByChild('age').limitToFirst(1).once('value')
+.then((snapshot)=>{
+   const user = [];
+
+   snapshot.forEach((snapshotchild)=>{
+       user.push({
+           id: snapshotchild.key,
+           ...snapshotchild.val()
+       })
+   })
+   console.log(user)
+})
+*/
